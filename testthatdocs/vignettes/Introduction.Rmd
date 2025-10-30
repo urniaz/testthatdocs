@@ -1,0 +1,237 @@
+---
+title: "Introduction to Idempotent Test Listings for testthat: Global and Section Lists"
+author: "Rafal Urniaz"
+date: "`r format(Sys.Date())`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{Introduction to Idempotent Test Listings for testthat: Global and Section Lists}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = TRUE
+)
+```
+
+# Overview
+
+This vignette introduces two functions for generating **roxygen-style** listings of your
+`testthat` tests:
+
+- `document_file()`: parses a single test file and inserts
+  a **global listing** (after `#' @testsList`) and per-**section listings**
+  (after each `#' @testsSection`). The function is **idempotent**: re-running replaces
+  only the `@testsItem` blocks and leaves the rest untouched.
+
+- `document()`: walks a `tests/testthat` directory and calls
+  `document_file()` for each file, returning per-file results and a combined
+  table.
+
+The listings are written as **roxygen comments**:
+
+```
+#' @testsList
+#' @testsItem 1 alpha one
+#' @testsItem 2 alpha two
+
+#' @testsSection Section A
+#' @testsItem 1 alpha one
+#' @testsItem 2 alpha two
+```
+
+> **Why?** Quick navigation and auditing of tests; machine- and human-readable
+> structure that integrates with documentation tooling; and predictable, idempotent
+> re-generation inside CI/CD.
+
+---
+
+# Key Concepts
+
+## Sections
+
+- **Plain section markers** (default prefix `"# -"`), like `# - My Section`,
+  are converted to roxygen markers on-the-fly:
+  ```
+  #' @testsSection My Section
+  ```
+- Any text following `@testsSection` on the same line is the **section title**.
+
+## Markers and Items
+
+- **Global marker**: `#' @testsList` (one per file; auto-added at top if missing).
+- **Section marker**: `#' @testsSection [Optional title]` (one or many).
+- **Items**: each entry is inserted immediately after the relevant marker:
+  ```
+  #' @testsItem <numbering> <title_expression>
+  ```
+
+## Titles: Raw but Clean
+
+The first argument to `test_that()` is recorded **as raw code**:
+- Literals like `"alpha one"` are kept **without the outer quotes** → `alpha one`.
+- Expressions like `paste("a", b)` or `glue::glue("{x}")` are **not evaluated** and are listed unchanged.
+
+## Numbering Templates
+
+Use placeholders to control numbering in both the global and section listings:
+- `{g}` — global index (1..N across all tests in the file)
+- `{s}` — section index (1..S)
+- `{i}` — local index within a section (1.. per section)
+- `{l}` — **final** line number in the modified file (after insertion)
+- Aliases: `{local}` → `{i}`, `{line}` → `{l}`
+
+Two presets:
+- `template = "simple"` → `"{g}"`
+- `template = "advanced"` → `"{g}.{s}.{i}.{l}"`
+
+Override with `global_fmt` and `section_fmt` for full control.
+
+---
+
+# `document_file()`
+
+## Arguments
+
+- `path` (`character`): path to the test file to process.
+- `section_prefix` (`character`): plain-text section header prefix to convert
+  (default: `"# -"`).
+- `template` (`"simple"|"advanced"|"custom"`): built-in number formats.
+- `global_fmt`, `section_fmt` (`character`): custom templates using `{g}`, `{s}`,
+  `{i}`, `{l}` and aliases.
+- `encoding` (`character`): file encoding for read/write (default: `"UTF-8"`).
+- `make_backup` (`logical`): if `TRUE`, writes a **timestamped** backup before
+  overwriting.
+- `write` (`logical`): if `TRUE`, overwrites the file. Set to `FALSE` for a dry-run
+  where the function returns the would-be modified text.
+
+## Return Value
+
+A list of class `tests_listing_result` with:
+- `text`: final modified lines (character vector).
+- `listing`: data frame with columns:
+  - `g`, `s`, `i`, `l` (final line number),
+  - `title_raw` (cleaned raw title),
+  - `section_title` (if any).
+- `written` (`logical`), `backup` (path or `NULL`).
+
+## Example
+
+```{r eval=FALSE}
+library(testthatdocs)
+
+res <- document_file(
+  path = system.file("examples", "tests_sample_before.R", package="testthatdocs"),
+  section_prefix = "# -",
+  template = "advanced",   # or "simple"
+  encoding = "UTF-8",
+  backup = TRUE,
+  write = TRUE
+)
+
+# Summary of tests 
+res$listing
+
+# Modified test file 
+res$text
+```
+
+---
+
+# `document()`
+
+Recursively processes a tree of test files (by default, `tests/testthat`).
+
+```{r eval=FALSE}
+library(testthatdocs)
+
+all_res <- document(
+  root = system.file("examples", package="testthatdocs"),
+  template = "advanced",
+  section_prefix = "# -",
+  encoding = "UTF-8",
+  backup = TRUE,
+  write = TRUE,
+  quiet = TRUE
+)
+
+# Combined table (with 'file' column)
+all_res$listing
+```
+
+## Arguments
+
+- `root` (`character`): directory to walk. Default `"tests/testthat"`.
+- `pattern` (`character`): regex to choose files (`"^[Tt]est.*\\.[rR]$"`).
+- `recurse` (`logical`): whether to search subfolders.
+- `exclude` (`character`): basenames to exclude (default `c("testthat.R")`).
+- All the options from `document_file()` are passed through and applied
+  to each file.
+
+## Return Value
+
+A list of class `tests_listing_dir_result` with:
+- `files`: processed file paths,
+- `results`: per-file `tests_listing_result` objects,
+- `listing`: combined table (adds a `file` column),
+- `backups`: vector of backup file paths (when `write=TRUE`).
+
+---
+
+# Idempotency Guarantees
+
+- Re-runs delete and re-create only the `@testsItem` **blocks** immediately following
+  `@testsList` and each `@testsSection` marker.
+- Everything else in the file is preserved, including manual comments and code.
+- Final numbering is computed **after** insertion using a two-pass approach, which
+  makes `{l}` faithful to the ultimate positions.
+
+---
+
+# Edge Cases & Notes
+
+- **Leading whitespace** before markers is tolerated (e.g., `  #' @testsList`).
+- **Placeholder safety**: a defensive cleanup removes any accidental temporary lines
+  like `#' @testsItem {g=3}{s=2}{i=1}`.
+- **Quoted titles**: only a **fully quoted** argument is unquoted in listings.
+  Expressions are left untouched.
+- **Missing global marker**: `#' @testsList` is auto-inserted at the top of the file.
+- **No sections**: Sections are optional; global listing still works.
+- **No tests**: If a file contains no `test_that()`, the function is a no-op
+  except ensuring the global marker exists (if you want to avoid that, run in dry-run).
+
+---
+
+# Troubleshooting
+
+- **Leftover `{g}` or placeholders**: ensure you're using the latest version;
+  the implementation rebuilds whole blocks and performs a global final cleanup.
+- **Encoding issues**: use `encoding = "UTF-8"` (default). For legacy files,
+  pass the correct encoding to both read & write.
+- **Custom numbering**: verify your template string uses correct placeholders
+  (`{g}`, `{s}`, `{i}`, `{l}`) or the aliases (`{local}`, `{line}`).
+
+---
+
+# Performance Tips
+
+- For large trees, set `quiet = TRUE` and run from CI to avoid excessive console I/O.
+- Dry-run first (`write = FALSE`) to inspect changes before writing.
+
+---
+
+# CI Integration
+
+TBA
+
+---
+
+# Reproducible Example
+
+In sections # `document_file()` and # `document()`

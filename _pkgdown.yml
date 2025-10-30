@@ -1,0 +1,10 @@
+template:
+  bootstrap: 5
+  bootswatch: flatly
+
+url: https://urniaz.github.io/testthatdocs
+
+authors:
+  Dr. Rafa Urniaz:
+    href: https://scholar.google.com/citations?user=Sw_xUZQAAAAJ
+    roles: [aut, cre]

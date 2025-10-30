@@ -1,0 +1,26 @@
+Package: testthatdocs
+Type: Package
+Title: Automated and Idempotent Unit Tests Documentation for Reproducible Quality Assurance 
+Version: 1.0.23
+Authors@R: 
+    c(person("Rafal", "Urniaz", comment = c(ORCID = "0000-0003-0192-2165"),
+		  email = "rafal.urniaz@cantab.net", role = c("aut", "cre")))
+Description: 
+    Automates documentation of test_that() calls within R test files. 
+    The package scans test sources, extracts human-readable test titles (even when 
+    composed with functions like paste() or glue::glue(), ... etc.), and generates 
+    reproducible roxygen2-style listings that can be inserted both globally and 
+    per-section. It ensures idempotent updates and supports customizable numbering 
+    templates with hierarchical indices. Designed for developers, QA teams, and package
+    maintainers seeking consistent, self-documenting test inventories. 
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends: R (>= 3.5)
+Imports:
+Suggests: testthat (>= 3.0.0), glue, knitr, rmarkdown, withr
+VignetteBuilder: knitr
+URL: https://github.com/urniaz/testthatdocs
+BugReports: https://github.com/urniaz/testthatdocs/issues
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Config/testthat/edition: 3

@@ -1,0 +1,62 @@
+---
+title: "Quick Start: Generating Idempotent test_that() Listings with Sections"
+author: "Rafal Urniaz"
+date: "`r format(Sys.Date())`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Quick Start: Generating Idempotent test_that() Listings with Sections}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 4
+)
+```
+
+## Overview
+
+This vignette demonstrates a robust, **idempotent** workflow for generating a
+roxygen2-style inventory of all `test_that()` calls in one test file. The
+function:
+
+- Extracts the **raw** first argument of `test_that()` as the *title* (without evaluating expressions).
+- Converts plain-text section markers (default `"# -"` prefix) to roxygen markers `#' @testsSection`.
+- Inserts a **global listing** after `#' @testsList` and **per-section listings** after each `#' @testsSection`.
+- Uses customizable numbering templates: `{g}` (global), `{s}` (section), `{i}` (local within section), `{l}` (final line number).
+- Is **idempotent**: only `@testsItem` blocks immediately following listing markers are regenerated; all other code and comments remain unchanged.
+- Optionally **backs up** the original file and supports a **dry-run** mode.
+- Strips **outer quotes** for plain string titles, while preserving expressions like `paste("x", y)`.
+
+## Quick Start
+
+```{r eval=FALSE}
+library(testthatdocs)
+
+res <- document_file(
+  path = system.file("examples", "tests_sample_before.R", package="testthatdocs"),
+  section_prefix = "# -",
+  template = "advanced",   # or "simple"
+  encoding = "UTF-8",
+  backup = TRUE,
+  write = TRUE
+)
+
+# Summary of tests 
+res$listing
+
+# Modified test file 
+res$text
+```
+```
+
+The result includes:
+
+- `text`: the modified file as a character vector (one line per element)
+- `listing`: a data frame with columns `g, s, i, l, title_raw, section_title`
+- `written`: whether the file was written
+- `backup`: backup path (if created)
