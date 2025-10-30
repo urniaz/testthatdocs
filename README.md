@@ -3,8 +3,6 @@ It automatically creates both global and section-specific listings using roxygen
 
 These listings make it easier to navigate, audit, and document your tests, and they integrate naturally with pkgdown and roxygen2 documentation workflows.
 
--
-
 # Install from CRAN 
 
 install.packages("testthatdocs")
