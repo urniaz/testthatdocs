@@ -7,7 +7,6 @@ These listings make it easier to navigate, audit, and document your tests, and t
 
 install.packages("testthatdocs")
 
----
 
 ## Key Features
 
