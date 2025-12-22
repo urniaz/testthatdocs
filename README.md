@@ -8,7 +8,7 @@ The **testthatdocs** is one-click documentation for testthat unit tests, simply 
 
 `testthatdocs::document()`
 
-so simple as 
+so simple as `devtools::document()`
 
 
 ## Key Features
