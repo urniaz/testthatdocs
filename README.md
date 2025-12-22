@@ -1,8 +1,8 @@
 <img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" align="right" width="25%" />
 
-The **testthatdocs** is one-click documentation for testthat unit tests
+<H1>The **testthatdocs** is one-click documentation for testthat unit tests</H1>
 
-## Install from CRAN 
+<H2> Install from CRAN </H2> 
 
 `install.packages("testthatdocs")`
 
