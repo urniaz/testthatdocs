@@ -1,4 +1,10 @@
-The **testthatdocs** is one-click documentation for testthat unit tests, simply ... <img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" style="position:absolute; top:0; left:0;" width="25%" height="25%">
+The **testthatdocs** is one-click documentation for testthat unit tests, simply ... 
+
+<div style="position:relative; width:300px; height:200px; border:1px solid #ccc;">
+  <img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" style="position:absolute; top:0; left:0;" width="25%" height="25%">
+</div>
+
+<img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" style="position:absolute; top:0; left:0;" width="25%" height="25%">
 
 
 # Install from CRAN 
