@@ -23,6 +23,9 @@
 <!-- Opcjonalnie: “maintained” / wersja -->
 ![Maintained](https://img.shields.io/maintenance/yes/2025)
 
+![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/testthatdocs)
+
+
 
 <a href="#"><img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" align="right" width="25%" style="pointer-events: none;"/></a>
 <H1 style="text-decoration: none;"> One-click documentation for testthat </H1>
