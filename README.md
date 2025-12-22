@@ -1,6 +1,6 @@
 <img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" align="right" width="25%" />
 
-<H1>The testthatdocs is one-click documentation for testthat unit tests</H1>
+<H1> The testthatdocs is one-click documentation for testthat unit tests </H1>
 
 <H3> Install from CRAN </H3> 
 
