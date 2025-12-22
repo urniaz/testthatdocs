@@ -1,5 +1,5 @@
 <a href="#"><img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" align="right" width="25%" style="pointer-events: none;"/></a>
-<H1> One-click documentation for testthat </H1> 
+<stronger><H2> One-click documentation for testthat </H2></stronger>
 <H3> Install from CRAN </H3> 
 
 `install.packages("testthatdocs")`
