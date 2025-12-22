@@ -1,11 +1,14 @@
-The **testthatdocs** package provides utilities for generating structured, idempotent listings of `test_that()` blocks in R test files.  
-It automatically creates both global and section-specific listings using roxygen-style comment markers.
-
-These listings make it easier to navigate, audit, and document your tests, and they integrate naturally with pkgdown and roxygen2 documentation workflows.
+The **testthatdocs** is one-click documentation for testthat unit tests, simply ...
 
 # Install from CRAN 
 
-install.packages("testthatdocs")
+`install.packages("testthatdocs")`
+
+# and Run 
+
+`testthatdocs::document()`
+
+so simple as 
 
 
 ## Key Features
