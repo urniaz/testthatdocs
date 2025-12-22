@@ -1,7 +1,5 @@
-<H1> The one-click documentation for testthat unit tests </H1>
-
 <img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" align="right" width="25%" />
-
+<H1> The one-click documentation for testthat unit tests </H1> 
 <H3> Install from CRAN </H3> 
 
 `install.packages("testthatdocs")`
@@ -21,7 +19,7 @@
 - Two numbering templates:
   - `"simple"` → `{g}`
   - `"advanced"` → `{g}.{s}.{i}.{l}`
-- Fully **idempotent** — listings are replaced, not duplicated.
+- Fully idempotent — listings are replaced, not duplicated.
 - Handles both single files and full testthat directories.
 
 ---
