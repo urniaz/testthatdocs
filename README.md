@@ -25,6 +25,7 @@
 
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/testthatdocs)
 
+![CRAN downloads](https://cranlogs.r-pkg.org/badges/testthatdocs)
 
 
 <a href="#"><img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" align="right" width="25%" style="pointer-events: none;"/></a>
