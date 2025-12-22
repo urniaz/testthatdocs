@@ -1,24 +1,24 @@
 <!-- Podstawowe -->
-![License](https://img.shields.io/github/license/TWOJ_LOGIN/TWOJE_REPO)
-![Stars](https://img.shields.io/github/stars/TWOJ_LOGIN/TWOJE_REPO?style=flat)
-![Forks](https://img.shields.io/github/forks/TWOJ_LOGIN/TWOJE_REPO?style=flat)
-![Issues](https://img.shields.io/github/issues/TWOJ_LOGIN/TWOJE_REPO)
-![PRs](https://img.shields.io/github/issues-pr/TWOJ_LOGIN/TWOJE_REPO)
-![Last commit](https://img.shields.io/github/last-commit/TWOJ_LOGIN/TWOJE_REPO)
+![License](https://img.shields.io/github/license/urniaz/testthatdocs)
+![Stars](https://img.shields.io/github/stars/urniaz/testthatdocs?style=flat)
+![Forks](https://img.shields.io/github/forks/urniaz/testthatdocs?style=flat)
+![Issues](https://img.shields.io/github/issues/urniaz/testthatdocs)
+![PRs](https://img.shields.io/github/issues-pr/urniaz/testthatdocs)
+![Last commit](https://img.shields.io/github/last-commit/urniaz/testthatdocs)
 
 <!-- Release / tag -->
-![Release](https://img.shields.io/github/v/release/TWOJ_LOGIN/TWOJE_REPO)
-![Tag](https://img.shields.io/github/v/tag/TWOJ_LOGIN/TWOJE_REPO)
+![Release](https://img.shields.io/github/v/release/urniaz/testthatdocs)
+![Tag](https://img.shields.io/github/v/tag/urniaz/testthatdocs)
 
 <!-- Aktywność / statystyki -->
-![Contributors](https://img.shields.io/github/contributors/TWOJ_LOGIN/TWOJE_REPO)
-![Repo size](https://img.shields.io/github/repo-size/TWOJ_LOGIN/TWOJE_REPO)
-![Code size](https://img.shields.io/github/languages/code-size/TWOJ_LOGIN/TWOJE_REPO)
-![Top language](https://img.shields.io/github/languages/top/TWOJ_LOGIN/TWOJE_REPO)
-![Languages](https://img.shields.io/github/languages/count/TWOJ_LOGIN/TWOJE_REPO)
+![Contributors](https://img.shields.io/github/contributors/urniaz/testthatdocs)
+![Repo size](https://img.shields.io/github/repo-size/urniaz/testthatdocs)
+![Code size](https://img.shields.io/github/languages/code-size/urniaz/testthatdocs)
+![Top language](https://img.shields.io/github/languages/top/urniaz/testthatdocs)
+![Languages](https://img.shields.io/github/languages/count/urniaz/testthatdocs)
 
 <!-- Status workflow (GitHub Actions) – zmień NAZWA_WORKFLOW.yml -->
-![CI](https://img.shields.io/github/actions/workflow/status/TWOJ_LOGIN/TWOJE_REPO/NAZWA_WORKFLOW.yml)
+![CI](https://img.shields.io/github/actions/workflow/status/urniaz/testthatdocs/NAZWA_WORKFLOW.yml)
 
 <!-- Opcjonalnie: “maintained” / wersja -->
 ![Maintained](https://img.shields.io/maintenance/yes/2025)
