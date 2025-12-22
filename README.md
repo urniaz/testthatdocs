@@ -1,3 +1,5 @@
+<H1> The testthatdocs is one-click documentation for testthat unit tests </H1>
+
 <img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" align="right" width="25%" />
 
 <H1> The testthatdocs is one-click documentation for testthat unit tests </H1>
