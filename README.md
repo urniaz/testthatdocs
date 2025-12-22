@@ -1,4 +1,4 @@
-The **testthatdocs** is one-click documentation for testthat unit tests, simply ... ![alt text](https://github.com/urniaz/blob/testthatdocs/logo.png?raw=true)
+The **testthatdocs** is one-click documentation for testthat unit tests, simply ... ![alt text](https://github.com/urniaz/blob/testthatdocs/man/figures/logo.png?raw=true)
 
 
 # Install from CRAN 
