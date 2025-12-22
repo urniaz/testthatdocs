@@ -1,12 +1,12 @@
 <img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" align="right" width="25%" />
 
-The **testthatdocs** is one-click documentation for testthat unit tests, simply ... 
+# The **testthatdocs** is one-click documentation for testthat unit tests, simply ... 
 
-# Install from CRAN 
+## Install from CRAN 
 
 `install.packages("testthatdocs")`
 
-# and Run 
+## and Run 
 
 `testthatdocs::document()`
 
