@@ -4,27 +4,27 @@
 ![CRAN/METACRAN License](https://img.shields.io/cran/l/testthatdocs)  
 
 <a href="#"><img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" align="right" width="30%" style="pointer-events: none"/></a>
-\# One-click documentation for testthat
+
+# One-click documentation for testthat
 
 ### Installation
 
 ```
-> install.packages("testthatdocs")
+install.packages("testthatdocs")
 ```
 
 ### Usage 
 
-`testthatdocs::document()`
+```
+testthatdocs::document()
+```
 
-### Key Features
+### Example
+
+TBA
+
+### Customise
 
 
-- Automatically generates roxygen-style listings:
-  - `#' @testsList` – global list of all tests.
-  - `#' @testsSection` – section-specific lists.
-  - `#' @testsItem` – numbered entries for each test.
-- Two numbering templates:
-  - `"simple"` → `{g}`
-  - `"advanced"` → `{g}.{s}.{i}.{l}`
 
 
