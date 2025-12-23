@@ -24,17 +24,6 @@ testthatdocs::document()
 ```r
 testthatdocs::document(template = "advanced")
 ```
-> [!NOTE] 
-> - Generates a **global list of tests** and **per-section test listings** as roxygen comments.
-> -Inserts the generated listings immediately after the corresponding markers.
-
-> [!TIP]
-> - The function is **idempotent**:
->  - Only replaces content between existing `@testsList` and `@testsSection` markers.
->  - Leaves all other code and comments unchanged.
-> - If section headers are provided using a plain-text prefix (e.g. `# -`):
->  - They are automatically converted to roxygen markers `#' @testsSection`.
- >  - Any text following the prefix is treated as the **section title**.
 
 <table>
 <tr>
@@ -106,6 +95,18 @@ test_that("Outside", {
 </td>
 </tr>
 </table>
+
+> [!NOTE] 
+> - Generates a **global list of tests** and **per-section test listings** as roxygen comments.
+> - Inserts the generated listings immediately after the corresponding markers.
+
+> [!TIP]
+> - The function is **idempotent**:
+>   + Only replaces content between existing `@testsList` and `@testsSection` markers.
+>   + Leaves all other code and comments unchanged.
+> - If section headers are provided using a plain-text prefix (e.g. `# -`):
+>   + They are automatically converted to roxygen markers `#' @testsSection`.
+>   + Any text following the prefix is treated as the **section title**.
 
 ### Numbering and Templates
 
