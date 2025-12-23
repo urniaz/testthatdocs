@@ -33,7 +33,7 @@ testthatdocs::document(template = "advanced")
 <tr>
 <td>
 
-```json
+```html
 # This is a demo test file
 
 # - Section A
