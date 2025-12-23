@@ -27,31 +27,20 @@ testthatdocs::document(template = "advanced")
 
 <table>
 <tr>
-<th>Json 1</th>
-<th>Markdown</th>
+<th>Before</th>
+<th>After</th>
 </tr>
 <tr>
 <td>
-<pre>
-{
-  "id": 1,
-  "username": "joe",
-  "email": "joe@example.com",
-  "order_id": "3544fc0"
-}
-</pre>
+```R
+
+```
 </td>
 <td>
 
-```json
-{
-  "id": 5,
-  "username": "mary",
-  "email": "mary@example.com",
-  "order_id": "f7177da"
-}
-```
+```R
 
+```
 </td>
 </tr>
 </table>
