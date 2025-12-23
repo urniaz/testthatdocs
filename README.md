@@ -1,5 +1,5 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/testthatdocs)](https://CRAN.R-project.org/package=testthatdocs)
-[![R-CMD-check](https://github.com/urniaz/testthatdocs/actions/workflows/r.yaml/badge.svg)](https://github.com/urniaz/testthatdocs/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/urniaz/testthatdocs/actions/workflows/r.yaml/badge.svg)](https://github.com/urniaz/testthatdocs/actions/workflows/r.yaml)
 [![Codecov coverage](https://codecov.io/gh/urniaz/testthatdocs/branch/main/graph/badge.svg)](https://codecov.io/gh/urniaz/testthatdocs)
 [![CodeFactor](https://www.codefactor.io/repository/github/urniaz/testthatdocs/badge)](https://www.codefactor.io/repository/github/urniaz/testthatdocs)
 
