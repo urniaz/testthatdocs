@@ -8,7 +8,9 @@
 
 ### Installation
 
-`install.packages("testthatdocs")`
+```
+> install.packages("testthatdocs")
+```
 
 ### Usage 
 
