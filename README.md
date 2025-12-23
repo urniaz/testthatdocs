@@ -32,15 +32,17 @@ testthatdocs::document(template = "advanced")
 </tr>
 <tr>
 <td>
-```R
 
+```R
+SSS
 ```
 </td>
 <td>
 
 ```R
-
+aaa
 ```
+
 </td>
 </tr>
 </table>
