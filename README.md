@@ -34,13 +34,62 @@ testthatdocs::document(template = "advanced")
 <td>
 
 ```r
-SSS
+# This is a demo test file
+
+# - Section A
+context("demo")
+test_that("A: literal one", {
+  expect_true(TRUE)
+})
+
+test_that(paste("A:", 2), {
+  expect_true(TRUE)
+})
+
+#' @testsSection Section B
+#' @testsItem OLD to be removed
+#' @testsItem OLD 2
+test_that(glue::glue("B-{x}", x = 3), {
+  expect_true(TRUE)
+})
+
+test_that("Outside", {
+  expect_true(TRUE)
+})
 ```
 </td>
 <td>
 
 ```r
-aaa
+#' @testsList
+#' @testsItem 1.1.1 A: literal one
+#' @testsItem 2.1.2 paste("A:", 2)
+#' @testsItem 3.2.1 glue::glue("B-{x}", x = 3)
+#' @testsItem 4.2.2 Outside
+# This is a demo test file
+
+#' @testsSection Section A
+#' @testsItem 1.1.1 A: literal one
+#' @testsItem 2.1.2 paste("A:", 2)
+context("demo")
+test_that("A: literal one", {
+  expect_true(TRUE)
+})
+
+test_that(paste("A:", 2), {
+  expect_true(TRUE)
+})
+
+#' @testsSection Section B
+#' @testsItem 3.2.1 glue::glue("B-{x}", x = 3)
+#' @testsItem 4.2.2 Outside
+test_that(glue::glue("B-{x}", x = 3), {
+  expect_true(TRUE)
+})
+
+test_that("Outside", {
+  expect_true(TRUE)
+})
 ```
 
 </td>
