@@ -3,6 +3,7 @@
 
 <a href="#"><img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" align="right" width="30%" style="pointer-events: none"/></a>
 <h1 style="border-bottom: 0;"> One-click documentation for testthat </h1>
+
 ### Install from CRAN
 
 `install.packages("testthatdocs")`
