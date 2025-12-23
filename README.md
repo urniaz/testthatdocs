@@ -9,19 +9,19 @@
 
 ### Installation
 
-```{R}
+```r
 install.packages("testthatdocs")
 ```
 
 ### Usage 
 
-```{R}
+```r
 testthatdocs::document()
 ```
 
 ### Example
 
-```{R}
+```r
 testthatdocs::document(template = "advanced")
 ```
 
@@ -33,13 +33,13 @@ testthatdocs::document(template = "advanced")
 <tr>
 <td>
 
-```{R}
+```r
 SSS
 ```
 </td>
 <td>
 
-```{R}
+```r
 aaa
 ```
 
