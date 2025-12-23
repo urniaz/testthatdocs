@@ -23,7 +23,27 @@ testthatdocs::document()
 
 TBA
 
-### Customise
+### Numbering and Templates
+
+Numbering is customisable via **templates** that use **placeholders**:
+
+- `{g}` – global incremental index across all tests  
+- `{s}` – section index (1-based, in order of appearance)  
+- `{i}` – local index within a section (1-based)  
+- `{l}` – line index (line number in the final, modified text)
+
+The following templates are available:
+
+- `"simple"` → `{g}`
+- `"advanced"` → `{g}.{s}.{i}`
+- `"full"` → `{g}.{s}.{i}.{l}`
+
+You can fully override the numbering format by providing custom values for:
+
+- `global_fmt`
+- `section_fmt`
+
+This allows complete control over how numbers are generated.
 
 
 
