@@ -412,11 +412,59 @@ test_that("Outside", {
       </section>
     </main>
 
-    <footer>
-      <p>
-        Built for GitHub Pages • Minimal, light theme • <span class="muted">testthatdocs</span>
-      </p>
-    </footer>
+    <footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <a class="footer-brand" href="https://github.com/urniaz" target="_blank" rel="noopener">
+      <img
+        src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true"
+        alt="testthatdocs logo"
+        class="footer-logo"
+        loading="lazy"
+      />
+    </a>
+
+    <p class="footer-text">
+      © <span id="year"></span> <a href="https://github.com/urniaz" target="_blank" rel="noopener">urniaz</a>
+      · <a href="https://lus.pl" target="_blank" rel="noopener">lus</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+<style>
+  .site-footer{
+    margin-top: 18px;
+    padding: 18px 0 10px;
+    color: #6b7280;
+    font-size: 13px;
+    text-align: center;
+  }
+  .footer-inner{
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(17,24,39,.06);
+  }
+  .footer-brand{ display: inline-flex; align-items: center; }
+  .footer-logo{
+    width: 34px;
+    height: auto;
+    border-radius: 10px;
+    pointer-events: none;
+    user-select: none;
+  }
+  .footer-text{ margin: 0; }
+  .footer-text a{ color: #111827; text-decoration: none; }
+  .footer-text a:hover{ text-decoration: underline; }
+</style>
+
   </div>
 </body>
 </html>
