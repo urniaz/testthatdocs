@@ -1,110 +1,162 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
-    <style>
-        body {
-            font-family: -apple-system, sans-serif;
-            line-height: 1.6;
-            max-width: 850px;
-            margin: auto;
-            padding: 40px 20px;
-            color: #24292f;
-        }
+<!-- Badges -->
+<p>
+  <a href="https://CRAN.R-project.org/package=testthatdocs">
+    <img alt="CRAN status" src="https://www.r-pkg.org/badges/version/testthatdocs">
+  </a>
+  <a href="https://github.com/urniaz/testthatdoc/actions/workflows/R-CMD-check.yaml">
+    <img alt="R-CMD-check" src="https://github.com/urniaz/testthatdoc/actions/workflows/R-CMD-check.yaml/badge.svg">
+  </a>
+  <a href="https://app.codacy.com/gh/urniaz/testthatdocs/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade">
+    <img alt="Codacy Badge" src="https://app.codacy.com/project/badge/Grade/108904994aa84de89b5f933b0f33bc67">
+  </a>
+  <img alt="CRAN/METACRAN License" src="https://img.shields.io/cran/l/testthatdocs">
+</p>
 
-        /* Nagłówek i Logo */
-        .header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
-        .logo { width: 120px; height: auto; }
-        .badges { margin-bottom: 20px; }
-        .badges img { margin-right: 5px; margin-bottom: 5px; }
-
-        /* Tabela porównawcza */
-        .comparison-table { width: 100%; border-collapse: collapse; margin: 25px 0; table-layout: fixed; }
-        .comparison-table th, .comparison-table td { 
-            border: 1px solid #d0d7de; padding: 10px; vertical-align: top; background: #fff;
-        }
-        .comparison-table th { background: #f6f8fa; }
-        .comparison-table pre { margin: 0; padding: 0; background: transparent; font-size: 12px; }
-
-        /* Alerty (Note/Tip) - Czysty Styl */
-        .alert {
-            padding: 15px;
-            margin: 20px 0;
-            border-left: 5px solid;
-            border-radius: 3px;
-            background: #f8f9fa;
-        }
-        .alert-note { border-color: #0969da; background: #f0f7ff; }
-        .alert-tip { border-color: #1a7f37; background: #f0fff4; }
-        .alert-title { font-weight: bold; margin-bottom: 5px; display: block; }
-
-        /* Ogólne */
-        code { background: #f3f3f3; padding: 2px 4px; border-radius: 3px; font-family: monospace; }
-        pre code { display: block; padding: 15px; overflow-x: auto; background: #f6f8fa; border-radius: 6px; }
-        h1 { border-bottom: 1px solid #eaecef; padding-bottom: 10px; }
-    </style>
-</head>
-<body>
-
-<div class="header">
-    <div class="badges">
-        <a href="https://CRAN.R-project.org/package=testthatdocs"><img src="https://www.r-pkg.org/badges/version/testthatdocs" alt="CRAN"></a>
-        <a href="https://github.com/urniaz/testthatdoc/actions"><img src="https://github.com/urniaz/testthatdoc/actions/workflows/R-CMD-check.yaml/badge.svg" alt="Check"></a>
-        <img src="https://img.shields.io/cran/l/testthatdocs" alt="License">
-    </div>
-    <img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" class="logo">
-</div>
+<!-- Logo (right aligned) -->
+<p align="right">
+  <a href="#">
+    <img
+      src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true"
+      alt="logo"
+      width="30%"
+    />
+  </a>
+</p>
 
 <h1>One-click documentation for testthat</h1>
 
 <h3>Installation</h3>
+
 <pre><code class="language-r">install.packages("testthatdocs")</code></pre>
 
 <h3>Usage</h3>
+
 <pre><code class="language-r">testthatdocs::document()</code></pre>
 
-<table class="comparison-table">
+<h3>Example</h3>
+
+<pre><code class="language-r">testthatdocs::document(template = "advanced")</code></pre>
+
+<table>
+  <thead>
     <tr>
-        <th>Before</th>
-        <th>After</th>
+      <th>Before</th>
+      <th>After</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
-        <td><pre><code class="language-r"># - Section A
+      <td>
+        <pre><code class="language-r"># This is a demo test file
+
+# - Section A
 context("demo")
-test_that("A: one", {
+test_that("A: literal one", {
   expect_true(TRUE)
-})</code></pre></td>
-        <td><pre><code class="language-r">#' @testsList
-#' @testsItem 1.1.1 A: one
+})
+
+test_that(paste("A:", 2), {
+  expect_true(TRUE)
+})
+
+#' @testsSection Section B
+#' @testsItem OLD to be removed
+#' @testsItem OLD 2
+test_that(glue::glue("B-{x}", x = 3), {
+  expect_true(TRUE)
+})
+
+test_that("Outside", {
+  expect_true(TRUE)
+})</code></pre>
+      </td>
+      <td>
+        <pre><code class="language-r">#' @testsList
+#' @testsItem 1.1.1 A: literal one
+#' @testsItem 2.1.2 paste("A:", 2)
+#' @testsItem 3.2.1 glue::glue("B-{x}", x = 3)
+#' @testsItem 4.2.2 Outside
+# This is a demo test file
+
+#' @testsSection Section A
+#' @testsItem 1.1.1 A: literal one
+#' @testsItem 2.1.2 paste("A:", 2)
 context("demo")
-test_that("A: one", {
+test_that("A: literal one", {
   expect_true(TRUE)
-})</code></pre></td>
+})
+
+test_that(paste("A:", 2), {
+  expect_true(TRUE)
+})
+
+#' @testsSection Section B
+#' @testsItem 3.2.1 glue::glue("B-{x}", x = 3)
+#' @testsItem 4.2.2 Outside
+test_that(glue::glue("B-{x}", x = 3), {
+  expect_true(TRUE)
+})
+
+test_that("Outside", {
+  expect_true(TRUE)
+})</code></pre>
+      </td>
     </tr>
+  </tbody>
 </table>
 
-<div class="alert alert-note">
-    <span class="alert-title">ℹ️ NOTE</span>
-    Generuje globalną listę testów oraz sekcje jako komentarze roxygen. Wstawia je bezpośrednio pod markerami.
+<!-- NOTE box -->
+<div style="border:1px solid #d0d7de; border-left:6px solid #0969da; padding:12px 14px; border-radius:8px; margin:16px 0;">
+  <strong>NOTE</strong>
+  <ul>
+    <li>Generates a <strong>global list of tests</strong> and <strong>per-section test listings</strong> as roxygen comments.</li>
+    <li>Inserts the generated listings immediately after the corresponding markers.</li>
+  </ul>
 </div>
 
-<div class="alert alert-tip">
-    <span class="alert-title">💡 TIP</span>
-    Funkcja jest <b>idempotentna</b> – nadpisuje tylko treść między markerami, nie dotykając reszty Twojego kodu.
+<!-- TIP box -->
+<div style="border:1px solid #d0d7de; border-left:6px solid #1a7f37; padding:12px 14px; border-radius:8px; margin:16px 0;">
+  <strong>TIP</strong>
+  <ul>
+    <li>The function is <strong>idempotent</strong>:
+      <ul>
+        <li>Only replaces content between existing <code>@testsList</code> and <code>@testsSection</code> markers.</li>
+        <li>Leaves all other code and comments unchanged.</li>
+      </ul>
+    </li>
+    <li>If section headers are provided using a plain-text prefix (e.g. <code># -</code>):
+      <ul>
+        <li>They are automatically converted to roxygen markers <code>#' @testsSection</code>.</li>
+        <li>Any text following the prefix is treated as the <strong>section title</strong>.</li>
+      </ul>
+    </li>
+  </ul>
 </div>
 
-<h3>Templates</h3>
-<p>Dostępne szablony numeracji:</p>
+<h3>Numbering and Templates</h3>
+
+<p>Numbering is customisable via <strong>templates</strong> that use <strong>placeholders</strong>:</p>
+
 <ul>
-    <li><code>"simple"</code>: <code>{g}</code></li>
-    <li><code>"advanced"</code>: <code>{g}.{s}.{i}</code></li>
+  <li><code>{g}</code> – global incremental index across all tests</li>
+  <li><code>{s}</code> – section index (1-based, in order of appearance)</li>
+  <li><code>{i}</code> – local index within a section (1-based)</li>
+  <li><code>{l}</code> – line index (line number in the final, modified text)</li>
 </ul>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/r.min.js"></script>
-<script>hljs.highlightAll();</script>
+<p>The following templates are available:</p>
 
-</body>
-</html>
+<ul>
+  <li><code>"simple"</code> → <code>{g}</code></li>
+  <li><code>"advanced"</code> → <code>{g}.{s}.{i}</code></li>
+  <li><code>"full"</code> → <code>{g}.{s}.{i}.{l}</code></li>
+</ul>
+
+<p>You can fully override the numbering format by providing custom values for:</p>
+
+<ul>
+  <li><code>global_fmt</code></li>
+  <li><code>section_fmt</code></li>
+</ul>
+
+<p>This allows complete control over how numbers are generated.</p>
