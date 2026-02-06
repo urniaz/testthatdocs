@@ -1,53 +1,309 @@
-<!-- Badges -->
-<p>
-  <a href="https://CRAN.R-project.org/package=testthatdocs">
-    <img alt="CRAN status" src="https://www.r-pkg.org/badges/version/testthatdocs">
-  </a>
-  <a href="https://github.com/urniaz/testthatdoc/actions/workflows/R-CMD-check.yaml">
-    <img alt="R-CMD-check" src="https://github.com/urniaz/testthatdoc/actions/workflows/R-CMD-check.yaml/badge.svg">
-  </a>
-  <a href="https://app.codacy.com/gh/urniaz/testthatdocs/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade">
-    <img alt="Codacy Badge" src="https://app.codacy.com/project/badge/Grade/108904994aa84de89b5f933b0f33bc67">
-  </a>
-  <img alt="CRAN/METACRAN License" src="https://img.shields.io/cran/l/testthatdocs">
-</p>
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>testthatdocs — One-click documentation for testthat</title>
+  <meta name="description" content="One-click documentation for testthat: generates global list of tests and per-section listings as roxygen comments." />
 
-<!-- Logo (right aligned) -->
-<p align="right">
-  <a href="#">
-    <img
-      src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true"
-      alt="logo"
-      width="30%"
-    />
-  </a>
-</p>
+  <!-- Open Graph (ładny podgląd linku) -->
+  <meta property="og:title" content="testthatdocs — One-click documentation for testthat" />
+  <meta property="og:description" content="Generuje globalną listę testów i listy per sekcja jako komentarze roxygen." />
+  <meta property="og:type" content="website" />
 
-<h1>One-click documentation for testthat</h1>
+  <!-- Prism (podświetlanie składni) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
 
-<h3>Installation</h3>
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --panel: #101826;
+      --text: #e8eef7;
+      --muted: #a9b4c2;
+      --link: #7cc4ff;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 10px 35px rgba(0,0,0,.35);
+      --accent: #7cc4ff;
+      --note: rgba(124,196,255,.14);
+      --tip: rgba(150,255,196,.14);
+      --noteBorder: rgba(124,196,255,.35);
+      --tipBorder: rgba(150,255,196,.35);
+      --codeBg: #0e1524;
+    }
 
-<pre><code class="language-r">install.packages("testthatdocs")</code></pre>
+    *{ box-sizing: border-box; }
+    html,body{ height: 100%; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 20% 0%, rgba(124,196,255,.18), transparent 55%),
+                  radial-gradient(900px 600px at 85% 10%, rgba(150,255,196,.12), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
 
-<h3>Usage</h3>
+    a{ color: var(--link); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
 
-<pre><code class="language-r">testthatdocs::document()</code></pre>
+    .container{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 34px 18px 70px;
+    }
 
-<h3>Example</h3>
+    header{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 22px 18px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
 
-<pre><code class="language-r">testthatdocs::document(template = "advanced")</code></pre>
+    .topline{
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
 
-<table>
-  <thead>
-    <tr>
-      <th>Before</th>
-      <th>After</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <pre><code class="language-r"># This is a demo test file
+    .badges{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      padding-right: 10px;
+    }
+
+    .badges img{
+      height: 20px;
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    .logo{
+      width: min(260px, 32vw);
+      max-width: 260px;
+      min-width: 160px;
+      opacity: 0.98;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,.35));
+    }
+
+    h1{
+      margin: 14px 0 4px;
+      font-size: clamp(26px, 4vw, 40px);
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle{
+      color: var(--muted);
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
+    .quick{
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .pill:hover{
+      background: rgba(255,255,255,.06);
+      text-decoration: none;
+    }
+
+    main{
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    section{
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 18px 14px;
+      box-shadow: var(--shadow);
+    }
+
+    h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    h3{
+      margin: 16px 0 10px;
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    .muted{ color: var(--muted); }
+
+    pre{
+      background: var(--codeBg) !important;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px !important;
+      overflow: auto;
+      margin: 10px 0 0;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+    code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+    .callout{
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      margin-top: 12px;
+      background: rgba(255,255,255,.02);
+    }
+    .callout.note{
+      border-color: var(--noteBorder);
+      background: var(--note);
+    }
+    .callout.tip{
+      border-color: var(--tipBorder);
+      background: var(--tip);
+    }
+    .callout strong{
+      display: inline-block;
+      margin-bottom: 6px;
+      letter-spacing: .01em;
+    }
+    .callout ul{ margin: 8px 0 0 18px; }
+    .callout li{ margin: 4px 0; }
+
+    table.compare{
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin-top: 12px;
+    }
+    table.compare th, table.compare td{
+      vertical-align: top;
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      background: rgba(0,0,0,.10);
+    }
+    table.compare th{
+      background: rgba(255,255,255,.04);
+      text-align: left;
+      font-weight: 650;
+      letter-spacing: .01em;
+    }
+    table.compare tr:last-child td{ border-bottom: none; }
+    table.compare th:last-child, table.compare td:last-child{ border-right: none; }
+
+    footer{
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      opacity: .9;
+    }
+
+    @media (max-width: 860px){
+      .topline{ flex-direction: column; align-items: flex-start; }
+      .logo{ width: 220px; }
+      table.compare th, table.compare td{ display: block; width: 100%; border-right: none; }
+      table.compare th{ border-bottom: 1px solid var(--border); }
+      table.compare tr{ display: grid; grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="topline">
+        <div>
+          <div class="badges" aria-label="Badges">
+            <a href="https://CRAN.R-project.org/package=testthatdocs" title="CRAN status">
+              <img alt="CRAN status" src="https://www.r-pkg.org/badges/version/testthatdocs">
+            </a>
+
+            <a href="https://github.com/urniaz/testthatdoc/actions/workflows/R-CMD-check.yaml" title="R-CMD-check">
+              <img alt="R-CMD-check" src="https://github.com/urniaz/testthatdoc/actions/workflows/R-CMD-check.yaml/badge.svg">
+            </a>
+
+            <a href="https://app.codacy.com/gh/urniaz/testthatdocs/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade" title="Codacy Grade">
+              <img alt="Codacy Badge" src="https://app.codacy.com/project/badge/Grade/108904994aa84de89b5f933b0f33bc67">
+            </a>
+
+            <img alt="CRAN/METACRAN License" src="https://img.shields.io/cran/l/testthatdocs">
+          </div>
+
+          <h1>One-click documentation for <code>testthat</code></h1>
+          <p class="subtitle">Generuje listy testów jako komentarze roxygen — globalnie oraz per sekcja.</p>
+
+          <div class="quick">
+            <a class="pill" href="https://CRAN.R-project.org/package=testthatdocs">CRAN</a>
+            <a class="pill" href="https://github.com/urniaz/testthatdocs">GitHub</a>
+            <a class="pill" href="#installation">Installation</a>
+            <a class="pill" href="#usage">Usage</a>
+            <a class="pill" href="#example">Example</a>
+            <a class="pill" href="#numbering">Numbering & Templates</a>
+          </div>
+        </div>
+
+        <img
+          class="logo"
+          src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true"
+          alt="testthatdocs logo"
+          loading="lazy"
+        />
+      </div>
+    </header>
+
+    <main>
+      <section id="installation">
+        <h2>Installation</h2>
+        <pre><code class="language-r">install.packages("testthatdocs")</code></pre>
+      </section>
+
+      <section id="usage">
+        <h2>Usage</h2>
+        <pre><code class="language-r">testthatdocs::document()</code></pre>
+      </section>
+
+      <section id="example">
+        <h2>Example</h2>
+        <pre><code class="language-r">testthatdocs::document(template = "advanced")</code></pre>
+
+        <h3>Before / After</h3>
+        <table class="compare" role="table" aria-label="Before and After comparison">
+          <thead>
+            <tr>
+              <th scope="col">Before</th>
+              <th scope="col">After</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+<pre><code class="language-r"># This is a demo test file
 
 # - Section A
 context("demo")
@@ -69,9 +325,9 @@ test_that(glue::glue("B-{x}", x = 3), {
 test_that("Outside", {
   expect_true(TRUE)
 })</code></pre>
-      </td>
-      <td>
-        <pre><code class="language-r">#' @testsList
+              </td>
+              <td>
+<pre><code class="language-r">#' @testsList
 #' @testsItem 1.1.1 A: literal one
 #' @testsItem 2.1.2 paste("A:", 2)
 #' @testsItem 3.2.1 glue::glue("B-{x}", x = 3)
@@ -100,63 +356,84 @@ test_that(glue::glue("B-{x}", x = 3), {
 test_that("Outside", {
   expect_true(TRUE)
 })</code></pre>
-      </td>
-    </tr>
-  </tbody>
-</table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-<!-- NOTE box -->
-<div style="border:1px solid #d0d7de; border-left:6px solid #0969da; padding:12px 14px; border-radius:8px; margin:16px 0;">
-  <strong>NOTE</strong>
-  <ul>
-    <li>Generates a <strong>global list of tests</strong> and <strong>per-section test listings</strong> as roxygen comments.</li>
-    <li>Inserts the generated listings immediately after the corresponding markers.</li>
-  </ul>
-</div>
+        <div class="callout note" role="note" aria-label="Note">
+          <strong>NOTE</strong>
+          <ul>
+            <li>Generates a <strong>global list of tests</strong> and <strong>per-section test listings</strong> as roxygen comments.</li>
+            <li>Inserts the generated listings immediately after the corresponding markers.</li>
+          </ul>
+        </div>
 
-<!-- TIP box -->
-<div style="border:1px solid #d0d7de; border-left:6px solid #1a7f37; padding:12px 14px; border-radius:8px; margin:16px 0;">
-  <strong>TIP</strong>
-  <ul>
-    <li>The function is <strong>idempotent</strong>:
-      <ul>
-        <li>Only replaces content between existing <code>@testsList</code> and <code>@testsSection</code> markers.</li>
-        <li>Leaves all other code and comments unchanged.</li>
-      </ul>
-    </li>
-    <li>If section headers are provided using a plain-text prefix (e.g. <code># -</code>):
-      <ul>
-        <li>They are automatically converted to roxygen markers <code>#' @testsSection</code>.</li>
-        <li>Any text following the prefix is treated as the <strong>section title</strong>.</li>
-      </ul>
-    </li>
-  </ul>
-</div>
+        <div class="callout tip" role="note" aria-label="Tip">
+          <strong>TIP</strong>
+          <ul>
+            <li>The function is <strong>idempotent</strong>:
+              <ul>
+                <li>Only replaces content between existing <code>@testsList</code> and <code>@testsSection</code> markers.</li>
+                <li>Leaves all other code and comments unchanged.</li>
+              </ul>
+            </li>
+            <li>If section headers are provided using a plain-text prefix (e.g. <code># -</code>):
+              <ul>
+                <li>They are automatically converted to roxygen markers <code>#' @testsSection</code>.</li>
+                <li>Any text following the prefix is treated as the <strong>section title</strong>.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-<h3>Numbering and Templates</h3>
+      <section id="numbering">
+        <h2>Numbering and Templates</h2>
+        <p class="muted">Numbering is customisable via <strong>templates</strong> that use <strong>placeholders</strong>:</p>
 
-<p>Numbering is customisable via <strong>templates</strong> that use <strong>placeholders</strong>:</p>
+        <ul>
+          <li><code>{g}</code> – global incremental index across all tests</li>
+          <li><code>{s}</code> – section index (1-based, in order of appearance)</li>
+          <li><code>{i}</code> – local index within a section (1-based)</li>
+          <li><code>{l}</code> – line index (line number in the final, modified text)</li>
+        </ul>
 
-<ul>
-  <li><code>{g}</code> – global incremental index across all tests</li>
-  <li><code>{s}</code> – section index (1-based, in order of appearance)</li>
-  <li><code>{i}</code> – local index within a section (1-based)</li>
-  <li><code>{l}</code> – line index (line number in the final, modified text)</li>
-</ul>
+        <p class="muted">The following templates are available:</p>
+        <ul>
+          <li><code>"simple"</code> → <code>{g}</code></li>
+          <li><code>"advanced"</code> → <code>{g}.{s}.{i}</code></li>
+          <li><code>"full"</code> → <code>{g}.{s}.{i}.{l}</code></li>
+        </ul>
 
-<p>The following templates are available:</p>
+        <p class="muted">
+          You can fully override the numbering format by providing custom values for:
+        </p>
+        <ul>
+          <li><code>global_fmt</code></li>
+          <li><code>section_fmt</code></li>
+        </ul>
 
-<ul>
-  <li><code>"simple"</code> → <code>{g}</code></li>
-  <li><code>"advanced"</code> → <code>{g}.{s}.{i}</code></li>
-  <li><code>"full"</code> → <code>{g}.{s}.{i}.{l}</code></li>
-</ul>
+        <p class="muted">This allows complete control over how numbers are generated.</p>
+      </section>
+    </main>
 
-<p>You can fully override the numbering format by providing custom values for:</p>
+    <footer>
+      <span>© <span id="year"></span> testthatdocs • Built for GitHub Pages</span>
+    </footer>
+  </div>
 
-<ul>
-  <li><code>global_fmt</code></li>
-  <li><code>section_fmt</code></li>
-</ul>
+  <script>
+    // Rok w stopce
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
-<p>This allows complete control over how numbers are generated.</p>
+  <!-- Prism JS -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script>
+    // Prism autoloader: doładuje "r" itd. automatycznie
+    Prism.plugins.autoloader.languages_path = "https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/";
+  </script>
+</body>
+</html>
