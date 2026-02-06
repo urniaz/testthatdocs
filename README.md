@@ -46,9 +46,7 @@ test_that(paste("A:", 2), {
   expect_true(TRUE)
 })
 
-#' @testsSection Section B
-#' @testsItem OLD to be removed
-#' @testsItem OLD 2
+#' - Section B
 test_that(glue::glue("B-{x}", x = 3), {
   expect_true(TRUE)
 })
