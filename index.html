@@ -4,380 +4,420 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>testthatdocs — One-click documentation for testthat</title>
+  <meta name="description" content="One-click documentation for testthat. Generate global and per-section test listings as roxygen comments." />
 
-  <meta name="description" content="One-click documentation for testthat" />
-
-  <!-- Prism (syntax highlight) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+  <!-- Simple, clean typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg: #ffffff;
-      --text: #1f2937;
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #111827;
       --muted: #6b7280;
       --border: #e5e7eb;
-      --link: #2563eb;
-      --codeBg: #f8fafc;
-      --panel: #f9fafb;
-      --note: #eef4ff;
-      --tip: #ecfdf5;
+      --shadow: 0 10px 30px rgba(17,24,39,.06);
+      --code-bg: #0b1020;
+      --code-text: #e5e7eb;
+      --link: #111827;
+      --chip-bg: #f3f4f6;
+      --note-bg: #f8fafc;
+      --tip-bg: #f8fafc;
+      --radius: 14px;
+      --max: 980px;
     }
 
     *{ box-sizing: border-box; }
-
+    html, body{ height: 100%; }
     body{
-      margin: 0;
-      background: var(--bg);
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
       color: var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      line-height: 1.6;
+      background: radial-gradient(1000px 600px at 10% -10%, #ffffff 0%, rgba(255,255,255,0) 60%),
+                  radial-gradient(1000px 600px at 90% -10%, #ffffff 0%, rgba(255,255,255,0) 60%),
+                  var(--bg);
+      line-height: 1.55;
     }
 
-    a{
-      color: var(--link);
-      text-decoration: none;
-    }
+    a{ color: var(--link); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
 
-    a:hover{
-      text-decoration: underline;
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 42px 20px 56px;
     }
-
-    .container{
-      max-width: 980px;
-      margin: auto;
-      padding: 40px 20px 60px;
-    }
-
-    /* Header */
 
     header{
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 24px;
-      margin-bottom: 32px;
+      position: relative;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow);
+      padding: 28px 28px 22px;
+      overflow: hidden;
     }
 
     .top{
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .logo{
+      width: min(280px, 30vw);
+      max-width: 300px;
+      height: auto;
+      user-select: none;
+      pointer-events: none;
+      opacity: .98;
+      filter: saturate(0.95);
     }
 
     .badges{
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin: 8px 0 0;
     }
-
-    .badges img{
+    .badges a, .badges img{
       height: 20px;
+      display: inline-block;
     }
-
-    .logo{
-      width: 200px;
-      max-width: 40vw;
-      pointer-events: none;
+    .badges img{
+      border-radius: 999px;
     }
 
     h1{
-      font-size: 36px;
-      margin: 6px 0;
-      font-weight: 700;
+      margin: 10px 0 4px;
+      font-size: clamp(26px, 3.6vw, 38px);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
     }
-
     .subtitle{
+      margin: 0;
       color: var(--muted);
-      margin-bottom: 12px;
+      font-size: 15px;
     }
 
-    nav{
+    .chips{
       display: flex;
-      gap: 14px;
       flex-wrap: wrap;
-      font-size: 14px;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .chip{
+      font-size: 12px;
+      color: #374151;
+      background: var(--chip-bg);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 999px;
     }
 
-    nav a{
-      padding: 4px 0;
+    main{
+      margin-top: 18px;
+      display: grid;
+      gap: 14px;
     }
 
-    /* Sections */
-
-    section{
-      margin-bottom: 36px;
+    .card{
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
     }
 
     h2{
-      font-size: 22px;
-      margin-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 6px;
-    }
-
-    h3{
+      margin: 0 0 10px;
       font-size: 18px;
-      margin-top: 20px;
+      letter-spacing: -0.01em;
     }
-
-    p, li{
-      max-width: 75ch;
+    h3{
+      margin: 18px 0 8px;
+      font-size: 15px;
+      letter-spacing: -0.01em;
     }
-
-    ul{
-      padding-left: 22px;
-    }
-
-    /* Code */
 
     pre{
-      background: var(--codeBg) !important;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 14px !important;
-      margin: 12px 0;
+      margin: 10px 0 0;
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 12px;
+      padding: 14px 14px;
       overflow: auto;
+      border: 1px solid rgba(255,255,255,.08);
     }
-
     code{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.95em;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
     }
 
-    /* Table */
+    .two-col{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    @media (max-width: 920px){
+      .top{ grid-template-columns: 1fr; }
+      .logo{ width: 220px; justify-self: start; }
+      .two-col{ grid-template-columns: 1fr; }
+    }
+
+    .callout{
+      border: 1px solid var(--border);
+      background: var(--note-bg);
+      border-radius: 12px;
+      padding: 14px 14px;
+      margin-top: 14px;
+    }
+    .callout strong{
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+    .callout ul{
+      margin: 6px 0 0 18px;
+      color: #111827;
+    }
+    .callout li{ margin: 6px 0; }
+
+    .muted{ color: var(--muted); }
 
     table{
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      font-size: 14px;
-    }
-
-    th, td{
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border-radius: 12px;
       border: 1px solid var(--border);
-      padding: 10px;
+      background: #fff;
+    }
+    th, td{
       vertical-align: top;
       text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
     }
-
     th{
-      background: var(--panel);
-      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #374151;
+      background: #f9fafb;
     }
-
-    /* Callouts */
-
-    .note, .tip{
-      border: 1px solid var(--border);
-      border-left: 4px solid;
-      padding: 12px 14px;
-      margin: 16px 0;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-
-    .note{
-      background: var(--note);
-      border-left-color: #2563eb;
-    }
-
-    .tip{
-      background: var(--tip);
-      border-left-color: #059669;
-    }
-
-    .note strong,
-    .tip strong{
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    /* Footer */
+    tr:last-child td{ border-bottom: 0; }
 
     footer{
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
-      padding-top: 20px;
-      font-size: 13px;
+      margin-top: 18px;
       color: var(--muted);
+      font-size: 13px;
       text-align: center;
     }
 
-    /* Mobile */
-
-    @media(max-width:700px){
-
-      h1{ font-size: 28px; }
-
-      .top{
-        flex-direction: column;
-      }
-
-      .logo{
-        width: 160px;
-      }
-
+    .inline-code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.95em;
+      background: #f3f4f6;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 8px;
     }
-
   </style>
 </head>
 
 <body>
+  <div class="wrap">
+    <header>
+      <div class="top">
+        <div>
+          <div class="badges" aria-label="Badges">
+            <a href="https://CRAN.R-project.org/package=testthatdocs" target="_blank" rel="noopener">
+              <img alt="CRAN status" src="https://www.r-pkg.org/badges/version/testthatdocs">
+            </a>
 
-<div class="container">
+            <a href="https://github.com/urniaz/testthatdoc/actions/workflows/R-CMD-check.yaml" target="_blank" rel="noopener">
+              <img alt="R-CMD-check" src="https://github.com/urniaz/testthatdoc/actions/workflows/R-CMD-check.yaml/badge.svg">
+            </a>
 
-<header>
+            <a href="https://app.codacy.com/gh/urniaz/testthatdocs/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade" target="_blank" rel="noopener">
+              <img alt="Codacy Badge" src="https://app.codacy.com/project/badge/Grade/108904994aa84de89b5f933b0f33bc67">
+            </a>
 
-  <div class="top">
+            <img alt="CRAN/METACRAN License" src="https://img.shields.io/cran/l/testthatdocs">
+          </div>
 
-    <div>
+          <h1>One-click documentation for testthat</h1>
+          <p class="subtitle">Generate a global list of tests and per-section test listings as roxygen comments.</p>
 
-      <div class="badges">
-        <a href="https://CRAN.R-project.org/package=testthatdocs">
-          <img src="https://www.r-pkg.org/badges/version/testthatdocs" alt="CRAN">
-        </a>
+          <div class="chips" aria-label="Highlights">
+            <span class="chip">Idempotent</span>
+            <span class="chip">Roxygen markers</span>
+            <span class="chip">Templates: simple / advanced / full</span>
+          </div>
+        </div>
 
-        <a href="https://github.com/urniaz/testthatdoc/actions/workflows/R-CMD-check.yaml">
-          <img src="https://github.com/urniaz/testthatdoc/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check">
-        </a>
-
-        <a href="https://app.codacy.com/gh/urniaz/testthatdocs/dashboard">
-          <img src="https://app.codacy.com/project/badge/Grade/108904994aa84de89b5f933b0f33bc67" alt="Codacy">
-        </a>
-
-        <img src="https://img.shields.io/cran/l/testthatdocs" alt="License">
+        <img
+          class="logo"
+          src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true"
+          alt="testthatdocs logo"
+        />
       </div>
+    </header>
 
-      <h1>One-click documentation for testthat</h1>
-      <p class="subtitle">
-        Generate test listings as roxygen comments
-      </p>
+    <main>
+      <section class="card" id="installation">
+        <h2>Installation</h2>
+        <pre><code class="language-r">install.packages("testthatdocs")</code></pre>
+      </section>
 
-      <nav>
-        <a href="#installation">Installation</a>
-        <a href="#usage">Usage</a>
-        <a href="#example">Example</a>
-        <a href="#numbering">Numbering</a>
-      </nav>
+      <section class="card" id="usage">
+        <h2>Usage</h2>
+        <pre><code class="language-r">testthatdocs::document()</code></pre>
 
-    </div>
+        <h3>Example</h3>
+        <pre><code class="language-r">testthatdocs::document(template = "advanced")</code></pre>
+      </section>
 
-    <img
-      src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true"
-      alt="Logo"
-      class="logo"
-    >
+      <section class="card" id="before-after">
+        <h2>Before / After</h2>
 
-  </div>
-
-</header>
-
-
-<!-- Installation -->
-
-<section id="installation">
-  <h2>Installation</h2>
-
-  <pre><code class="language-r">install.packages("testthatdocs")</code></pre>
-</section>
-
-
-<!-- Usage -->
-
-<section id="usage">
-  <h2>Usage</h2>
-
-  <pre><code class="language-r">testthatdocs::document()</code></pre>
-</section>
-
-
-<!-- Example -->
-
-<section id="example">
-  <h2>Example</h2>
-
-  <pre><code class="language-r">testthatdocs::document(template = "advanced")</code></pre>
-
-  <h3>Before / After</h3>
-
-  <table>
-    <tr>
-      <th>Before</th>
-      <th>After</th>
-    </tr>
-
-    <tr>
-      <td>
-<pre><code class="language-r"># This is a demo test file
+        <div class="two-col">
+          <div>
+            <h3>Before</h3>
+            <pre><code class="language-r"># This is a demo test file
 
 # - Section A
 context("demo")
 test_that("A: literal one", {
   expect_true(TRUE)
+})
+
+test_that(paste("A:", 2), {
+  expect_true(TRUE)
+})
+
+#' @testsSection Section B
+#' @testsItem OLD to be removed
+#' @testsItem OLD 2
+test_that(glue::glue("B-{x}", x = 3), {
+  expect_true(TRUE)
+})
+
+test_that("Outside", {
+  expect_true(TRUE)
 })</code></pre>
-      </td>
+          </div>
 
-      <td>
-<pre><code class="language-r">#' @testsList
-#' @testsItem 1.1.1 A: literal one</code></pre>
-      </td>
-    </tr>
-  </table>
+          <div>
+            <h3>After</h3>
+            <pre><code class="language-r">#' @testsList
+#' @testsItem 1.1.1 A: literal one
+#' @testsItem 2.1.2 paste("A:", 2)
+#' @testsItem 3.2.1 glue::glue("B-{x}", x = 3)
+#' @testsItem 4.2.2 Outside
+# This is a demo test file
 
+#' @testsSection Section A
+#' @testsItem 1.1.1 A: literal one
+#' @testsItem 2.1.2 paste("A:", 2)
+context("demo")
+test_that("A: literal one", {
+  expect_true(TRUE)
+})
 
-  <div class="note">
-    <strong>NOTE</strong>
-    Generates global and per-section test lists.
+test_that(paste("A:", 2), {
+  expect_true(TRUE)
+})
+
+#' @testsSection Section B
+#' @testsItem 3.2.1 glue::glue("B-{x}", x = 3)
+#' @testsItem 4.2.2 Outside
+test_that(glue::glue("B-{x}", x = 3), {
+  expect_true(TRUE)
+})
+
+test_that("Outside", {
+  expect_true(TRUE)
+})</code></pre>
+          </div>
+        </div>
+
+        <div class="callout" role="note" aria-label="Note">
+          <strong>NOTE</strong>
+          <ul>
+            <li>Generates a <b>global list of tests</b> and <b>per-section test listings</b> as roxygen comments.</li>
+            <li>Inserts the generated listings immediately after the corresponding markers.</li>
+          </ul>
+        </div>
+
+        <div class="callout" role="note" aria-label="Tip">
+          <strong>TIP</strong>
+          <ul>
+            <li>The function is <b>idempotent</b>:
+              <ul>
+                <li>Only replaces content between existing <span class="inline-code">@testsList</span> and <span class="inline-code">@testsSection</span> markers.</li>
+                <li>Leaves all other code and comments unchanged.</li>
+              </ul>
+            </li>
+            <li>If section headers are provided using a plain-text prefix (e.g. <span class="inline-code"># -</span>):
+              <ul>
+                <li>They are automatically converted to roxygen markers <span class="inline-code">#' @testsSection</span>.</li>
+                <li>Any text following the prefix is treated as the <b>section title</b>.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card" id="numbering-templates">
+        <h2>Numbering and Templates</h2>
+        <p class="muted">
+          Numbering is customisable via <b>templates</b> that use placeholders:
+        </p>
+
+        <ul>
+          <li><span class="inline-code">{g}</span> – global incremental index across all tests</li>
+          <li><span class="inline-code">{s}</span> – section index (1-based, in order of appearance)</li>
+          <li><span class="inline-code">{i}</span> – local index within a section (1-based)</li>
+          <li><span class="inline-code">{l}</span> – line index (line number in the final, modified text)</li>
+        </ul>
+
+        <h3>Built-in templates</h3>
+        <ul>
+          <li><span class="inline-code">"simple"</span> → <span class="inline-code">{g}</span></li>
+          <li><span class="inline-code">"advanced"</span> → <span class="inline-code">{g}.{s}.{i}</span></li>
+          <li><span class="inline-code">"full"</span> → <span class="inline-code">{g}.{s}.{i}.{l}</span></li>
+        </ul>
+
+        <h3>Full override</h3>
+        <p class="muted">
+          You can fully override the numbering format by providing custom values for:
+        </p>
+        <ul>
+          <li><span class="inline-code">global_fmt</span></li>
+          <li><span class="inline-code">section_fmt</span></li>
+        </ul>
+
+        <p class="muted">
+          This allows complete control over how numbers are generated.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Built for GitHub Pages • Minimal, light theme • <span class="muted">testthatdocs</span>
+      </p>
+    </footer>
   </div>
-
-
-  <div class="tip">
-    <strong>TIP</strong>
-    Function is idempotent and safe to rerun.
-  </div>
-
-</section>
-
-
-<!-- Numbering -->
-
-<section id="numbering">
-
-  <h2>Numbering and Templates</h2>
-
-  <ul>
-    <li><code>{g}</code> – global index</li>
-    <li><code>{s}</code> – section index</li>
-    <li><code>{i}</code> – local index</li>
-    <li><code>{l}</code> – line index</li>
-  </ul>
-
-  <p>Templates:</p>
-
-  <ul>
-    <li><code>simple</code> → {g}</li>
-    <li><code>advanced</code> → {g}.{s}.{i}</li>
-    <li><code>full</code> → {g}.{s}.{i}.{l}</li>
-  </ul>
-
-</section>
-
-
-<footer>
-  © <span id="year"></span> testthatdocs
-</footer>
-
-</div>
-
-
-<!-- Prism -->
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-
-<script>
-  document.getElementById("year").textContent =
-    new Date().getFullYear();
-</script>
-
 </body>
 </html>
