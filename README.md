@@ -6,7 +6,7 @@
 <a href="#"><img src="https://github.com/urniaz/testthatdocs/blob/main/testthatdocs/man/figures/logo.png?raw=true" alt="logo" align="right" width="30%" style="pointer-events: none; z-index:999;"/></a>
 
 # One-click documentation for testthat
-
+**Rafal Urniaz, PhD PharmSci** [![ORCID](https://img.shields.io/badge/ORCID-0000--0003--0192--2165-A6CE39?logo=orcid&logoColor=FFFFFF)](https://orcid.org/0000-0003-0192-2165) 
 ### Installation
 
 ```r
